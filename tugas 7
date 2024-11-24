@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class CoinChange {
+    public static int countWays(int[] coins, int total, int index) {
+        if (total == 0) {
+            return 1;
+        }
+        if (total < 0) {
+            return 0;
+        }
+        if (index >= coins.length) {
+            return 0;
+        }
+
+        return countWays(coins, total - coins[index], index) + countWays(coins, total, index + 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] coins = {2, 3, 5, 10, 15};
+
+        System.out.print("Masukkan total yang ingin dicapai: ");
+        int total = scanner.nextInt();
+
+        int ways = countWays(coins, total, 0);
+        System.out.println("Jumlah cara untuk mencapai total " + total + " adalah: " + ways);
+        
+        scanner.close();
+    }
+}
